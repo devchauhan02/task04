@@ -15,3 +15,15 @@ admin_username = "azureuser"
 vm_size        = "Standard_B2s_v2"
 
 tag_creator = "devashish_chauhan@epam.com"
+http_rule_name = "AllowHTTP"
+ssh_rule_name  = "AllowSSH"
+
+vnet_address_space   = ["10.0.0.0/16"]
+subnet_address_prefix = ["10.0.1.0/24"]
+
+ip_config_name = "internal"
+
+image_publisher = "Canonical"
+image_offer     = "0001-com-ubuntu-server-noble"
+image_sku       = "24_04-lts"
+image_version   = "latest"

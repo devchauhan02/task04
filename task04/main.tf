@@ -11,7 +11,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = var.vnet_address_space
 
   tags = {
     Creator = var.tag_creator
@@ -22,7 +22,7 @@ resource "azurerm_subnet" "subnet" {
   name                 = var.subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.vnet_name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.subnet_address_prefix
 }
 
 resource "azurerm_public_ip" "pip" {
@@ -48,7 +48,7 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_network_security_rule" "http" {
-  name                        = "AllowHTTP"
+  name                        = var.http_rule_name
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
@@ -62,7 +62,7 @@ resource "azurerm_network_security_rule" "http" {
 }
 
 resource "azurerm_network_security_rule" "ssh" {
-  name                        = "AllowSSH"
+  name                        = var.ssh_rule_name
   priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"
@@ -81,7 +81,7 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = var.resource_group_name
 
   ip_configuration {
-    name                          = "internal"
+    name                          = var.ip_config_name
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.pip.id
@@ -118,10 +118,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-noble"
-    sku       = "24_04-lts"
-    version   = "latest"
+    publisher = var.image_publisher
+    offer     = var.image_offer
+    sku       = var.image_sku
+    version   = var.image_version
   }
 
   tags = {

@@ -63,3 +63,47 @@ variable "tag_creator" {
   description = "Creator tag"
   type        = string
 }
+variable "http_rule_name" {
+  description = "HTTP rule name"
+  type        = string
+}
+
+variable "ssh_rule_name" {
+  description = "SSH rule name"
+  type        = string
+}
+
+variable "vnet_address_space" {
+  description = "VNet CIDR"
+  type        = list(string)
+}
+
+variable "subnet_address_prefix" {
+  description = "Subnet CIDR"
+  type        = list(string)
+}
+
+variable "ip_config_name" {
+  description = "NIC IP config name"
+  type        = string
+}
+
+variable "image_publisher" {
+  description = "Image publisher"
+  type        = string
+}
+
+variable "image_offer" {
+  description = "Image offer"
+  type        = string
+}
+
+variable "image_sku" {
+  description = "Image SKU"
+  type        = string
+}
+
+variable "image_version" {
+  description = "Image version"
+  type        = string
+}
