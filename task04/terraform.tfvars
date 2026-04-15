@@ -24,6 +24,6 @@ subnet_address_prefix = ["10.0.1.0/24"]
 ip_config_name = "internal"
 
 image_publisher = "Canonical"
-image_offer     = "0001-com-ubuntu-server-noble"
-image_sku       = "24_04-lts"
+image_offer     = "0001-com-ubuntu-server-jammy"
+image_sku       = "22_04-lts"
 image_version   = "latest"
